@@ -1,0 +1,342 @@
+{#FERREIRA STOJKOVIC Nikola#}
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <!--Bouton du modal -->
+    <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#reserver">
+        Prendre rendez-vous
+    </button>
+    <a href="{% url 'rendezvous' %}">prendre rdv</a>
+
+    {#    <div class="alert alert-success m-2" id="msg" role="alert">#}
+    {#    Alert!#}
+    {#    </div>#}
+
+    <!-- Titre -->
+    <h1>Planning des réservations</h1>
+    <p id="test"></p>
+
+    <!-- Contenu de la page -->
+    <div class="container mt-5 planning">
+
+        <!--    Navbar date -->
+        <div class="row">
+
+            <!--        Fleche de gauche -->
+            <div class="col-sm-1 float-left">
+                <a href="#" id="subDay">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="black"
+                         class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+                        <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"></path>
+                    </svg>
+                </a>
+            </div>
+
+            <!--        Date -->
+            <div class="col-sm-3 m-auto text-center fw-bold">
+                <p id="date"></p>
+            </div>
+
+            <!--        Fleche de droite -->
+            <div class="col-sm-1 float-right text-end">
+                <a href="#" id="addDay">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="black"
+                         class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                        <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!--    Block des reservations -->
+        <div class="row mt-5 mb-5 pb-5 justify-content-center">
+
+
+            <!--        Ligne de reservations (du matin) -->
+        <h1>Matin</h1>
+            <div class="row justify-content-around mt-3">
+
+                {% for reservation in r_matin %}
+
+{#                    if mandante/client/visiteur changer les options #}
+
+                    <!--            Block d'une reservation-->
+                    <div class="col-sm-2 text-center p-1 justify-content-center m-1 reservationr modele">
+                        <div class="modif align-self-start" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                 class="bi bi-pencil-square float-end" viewBox="0 0 16 16">
+                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"></path>
+                                <path fill-rule="evenodd"
+                                      d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"></path>
+                            </svg>
+                        </div>
+
+                        <div class="heure fw-bold mt-5">{{ reservation.date_heure|time }}</div>
+
+
+                        <!--                <p class="heure fw-bold d-inline-block align-middle w100 mt-5">8h00 - 8h45</p>-->
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!--        Ligne de reservations (de l'après-midi) -->
+        <h1>Après-midi</h1>
+            <div class="row justify-content-around mt-3">
+
+                {% for reservation in r_apresmidi %}
+                    <!--            Block d'une réservation-->
+                    <div class="col-sm-2 text-center p-1 justify-content-center m-1 reservationr modele">
+                        <div class="modif align-self-start" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                 class="bi bi-pencil-square float-end" viewBox="0 0 16 16">
+                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"></path>
+                                <path fill-rule="evenodd"
+                                      d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"></path>
+                            </svg>
+                        </div>
+
+                        <div class="heure fw-bold mt-5">{{ reservation.date_heure|time }}</div>
+
+                    </div>
+
+                {% endfor %}
+            </div>
+
+
+            <!--        <button type="button" class="btn btn-primary" id="open" data-toggle="modal" data-target="#modal"-->
+            <!--                style="width: 10%" onclick="changeColor()">Show modal-->
+            <!--        </button>-->
+
+
+            <!--        Modal -->
+            {#                                <div id="overlay">#}
+            {#                                    <div class="modal active" id="myModal" data-target="#mymodal" style="position: fixed">#}
+            {#                                        <div class="modal dialog">#}
+            {#                                            <div class="modal-content">#}
+            {#                                                <div class="modal-header">#}
+            {#                                                    <button class="close" type="button" data-dismiss="modal">&times;</button>#}
+            {#                                                    <h1 class="modal-title">Titre</h1>#}
+            {#                                                </div>#}
+            {#                                                <div class="modal-body">#}
+            {#                                                    <p>body</p>#}
+            {#                                                </div>#}
+            {#                                                <div class="modal-footer">#}
+            {##}
+            {#                                                </div>#}
+            {#                                            </div>#}
+            {#                                        </div>#}
+            {#                                    </div>#}
+            {#                                </div>#}
+            <!-- Fin modal -->
+
+        </div>
+
+        <!--    Légendes des couleurs -->
+        <div class="row float-end">
+            <div class="row row-cols-2">
+                <div class="col-sm-1 couleur-reserve">
+                </div>
+                <p>Réservé</p>
+            </div>
+            <div class="row row-cols-2 mt-1">
+                <div class="col-sm-1 couleur-libre">
+                </div>
+                <p>Libre</p>
+            </div>
+        </div>
+
+
+        {#        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"#}
+        {#             aria-hidden="true">#}
+        {#            <div class="modal-dialog">#}
+        {#                <div class="modal-content">#}
+        {#                    <div class="modal-header">#}
+        {#                        <h5 class="modal-title" id="exampleModalLabel">Modification</h5>#}
+        {#                        <button type="button" class="btn-close" data-bs-dismiss="modal"#}
+        {#                                aria-label="Close"></button>#}
+        {#                    </div>#}
+        {#                    <div class="modal-body">#}
+        {#                        <form>#}
+        {#                            <div class="w-75 m-auto">#}
+        {#                                <h3>Réservation</h3>#}
+        {#                                <div class="row mb-3">#}
+        {#                                    <div class="col">#}
+        {#                                        <label for="date" class="col-form-label">Date:</label>#}
+        {#                                    </div>#}
+        {#                                    <div class="col">#}
+        {#                                        <input type="date" class="form-control" id="date">#}
+        {#                                    </div>#}
+        {#                                </div>#}
+        {#                                <div class="row mb-3">#}
+        {#                                    <div class="col">#}
+        {#                                        <label for="heure" class="col-form-label">heure:</label>#}
+        {#                                    </div>#}
+        {#                                    <div class="col">#}
+        {#                                        <input type="time" class="form-control" id="heure">#}
+        {#                                    </div>#}
+        {#                                </div>#}
+        {#                                <h3>Client</h3>#}
+        {#                                <div class="row mb-3">#}
+        {#                                    <div class="col">#}
+        {#                                        <label for="prenom" class="col-form-label">Prenom:</label>#}
+        {#                                    </div>#}
+        {#                                    <div class="col">#}
+        {#                                        <input type="text" class="form-control" id="prenom">#}
+        {#                                    </div>#}
+        {#                                </div>#}
+        {#                                <div class="row mb-3">#}
+        {#                                    <div class="col">#}
+        {#                                        <label for="nom" class="col-form-label">Nom:</label>#}
+        {#                                    </div>#}
+        {#                                    <div class="col">#}
+        {#                                        <input type="text" class="form-control" id="nom">#}
+        {#                                    </div>#}
+        {#                                </div>#}
+        {#                                <div class="row mb-3">#}
+        {#                                    <div class="col">#}
+        {#                                        <label for="email" class="col-form-label">Email:</label>#}
+        {#                                    </div>#}
+        {#                                    <div class="col">#}
+        {#                                        <input type="email" class="form-control" id="email">#}
+        {#                                    </div>#}
+        {#                                </div>#}
+        {#                                <div class="row mb-3">#}
+        {#                                    <div class="col">#}
+        {#                                        <label for="message-text" class="col-form-label">Message:</label>#}
+        {#                                    </div>#}
+        {#                                    <div class="col">#}
+        {#                                        <textarea class="form-control" id="message-text"></textarea>#}
+        {#                                    </div>#}
+        {#                                </div>#}
+        {#                            </div>#}
+        {#                        </form>#}
+        {#                    </div>#}
+        {#                    <div class="modal-footer">#}
+        {#                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>#}
+        {#                        <button type="button" class="btn btn-primary">Modifier</button>#}
+        {#                    </div>#}
+        {#                </div>#}
+        {#            </div>#}
+        {#        </div>#}
+        {##}
+        {#                        <h5 class="modal-title" id="reserver">Prendre rendez-vous</h5>#}
+        {#                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>#}
+        {#                    </div>#}
+        {#                    <div class="modal-body">#}
+        {#                        <form action="#" method="post">#}
+        {#                            <div class="w-75 m-auto">#}
+        {#                                <h3>Réservation</h3>#}
+        {#                                <div class="row mb-3">#}
+        {#                                    <div class="col">#}
+        {#                                        <label for="date" class="col-form-label">Date:</label>#}
+        {#                                    </div>#}
+        {#                                    <div class="col">#}
+        {#                                        <input type="date" class="form-control" id="date">#}
+        {#                                    </div>#}
+        {#                                </div>#}
+        {#                                <div class="row mb-3">#}
+        {#                                    <div class="col">#}
+        {#                                        <label for="heure" class="col-form-label">heure:</label>#}
+        {#                                    </div>#}
+        {#                                    <div class="col">#}
+        {#                                        <input type="time" id="heure" class="form-control">#}
+        {#                                    </div>#}
+        {#                                </div>#}
+        {##}
+        {#                                <div class="row mb-3">#}
+        {#                                    <div class="col">#}
+        {#                                        <label for="commentaire" class="col-form-label">Commentaire:</label>#}
+        {#                                    </div>#}
+        {#                                    <div class="col">#}
+        {#                                        <textarea class="form-control" id="commentaire"></textarea>#}
+        {#                                    </div>#}
+        {#                                </div>#}
+        {#                            </div>#}
+        {#                        </form>#}
+        {#                    </div>#}
+        {#                    <div class="modal-footer">#}
+        {#                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>#}
+        {#                        <button type="button" class="btn btn-primary">Modifier</button>#}
+        {#                    </div>#}
+
+
+        <script>
+
+            {#Afficher message de confirmation#}
+{##}
+{#            setTimeout(function () {#}
+{#                if ($('#msg').length > 0) {#}
+{#                    $('#msge').remove();#}
+{#                }#}
+{#            }, 2000)#}
+{##}
+            {#Remplir le modal pour chaque réservation#}
+            {#https://stackoverflow.com/questions/10626885/passing-data-to-a-bootstrap-modal#}
+{##}
+{#            $(document).on("click", ".open-AddBookDialog", function () {#}
+{#                var myBookId = $(this).data('id');#}
+{#                $(".modal-body #bookId").val(myBookId);#}
+{#                // As pointed out in comments,#}
+{#                // it is unnecessary to have to manually call the modal.#}
+{#                // $('#addBookDialog').modal('show');#}
+{#            });#}
+
+            {# Affiche la date #}
+
+            function affichage(n) {
+                y = n.getFullYear();
+                m = n.toLocaleString('default', {month: 'long'})
+                d = n.getDate();
+                j = n.toLocaleDateString('default', {weekday: 'long'});
+                document.getElementById("date").innerHTML = j.replace(/^\w/, (c) => c.toUpperCase()) + ", " + d + " " + m + " " + y;
+            }
+
+            {# Initialise la date du jour du système et l'affiche #}
+            n = new Date();
+            affichage(n)
+
+            {# Stocke les flèches du calendrier dans des variables #}
+            var addDay = document.querySelector('#addDay')
+            var subDay = document.querySelector('#subDay')
+
+            {# Crée une fonction qui ajoute le nombre de jour en paramètre à la date du jour #}
+            Date.prototype.addDays = function (days) {
+                var date = new Date();
+                date.setDate(date.getDate() + days);
+                return date;
+            }
+
+            {# Crée un compteur qui suit la navigation dans le calendrier #}
+            var cpt = 0;
+
+            {# Compte le nombre de clicks sur la flèche droite du calendrier, met à jour la date et l'affiche #}
+            addDay.onclick = (function outer() {
+                let counter = 0;
+                return function inner() {
+                    counter++;
+                    cpt++;
+                    x = n.addDays(cpt)
+                    affichage(x)
+                    console.log(cpt)
+                    console.log('ID:' + addDay.id + 'Number of clicks: ' + counter);
+                };
+            })();
+
+            {# Compte le nombre de clicks sur la flèche gauche du calendrier, met à jour la date et l'affiche #}
+            subDay.onclick = (function outer() {
+                let counter = 0;
+                return function inner() {
+                    counter++;
+                    cpt--;
+                    x = n.addDays(cpt)
+                    affichage(x)
+                    console.log(cpt)
+                    console.log('ID:' + subDay.id + 'Number of clicks: ' + counter);
+                };
+            })();
+
+        </script>
+    </div>
+
+{% endblock %}

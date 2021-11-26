@@ -1,0 +1,45 @@
+{# Zumeri Faton #}
+{% extends 'base.html' %}
+{% block title %}Produits{% endblock %}
+{% load static %}
+
+{% block content %}
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Produits</title>
+    </head>
+    <body>
+    <div class="row">
+
+        {% for categ,_ in categorie %}
+            <h3> {{ categ }} </h3>
+            <hr>
+            {% for p in produits %}
+                {% if p.categorie == categ %}
+                    <div class="col-lg-4">
+                    {% if p.image%}
+                        <img class="thumbnail" src="{% static p.image.url %}" alt="img">
+                        {% endif %}
+                        <div class="box-element product">
+                            <h6><strong>{{ p.nom }}</strong></h6>
+                            <hr>
+                            <button data-produit="{{ p.id }}" data-action="add"
+                                    class="btn btn-outline-secondary add-btn update-cart">Ajouter au panier
+                            </button>
+                            <h4 style="display: inline-block; float: right">{{ p.prix_vente }}</h4>
+                        </div>
+                        </br></br>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </div>
+
+
+    </html>
+    <br><br>
+
+{% endblock %}

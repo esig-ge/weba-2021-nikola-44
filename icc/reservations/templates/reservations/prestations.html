@@ -1,0 +1,567 @@
+{#FERREIRA STOJKOVIC Nikola#}
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    .page {
+        min-height: 900px;
+    }
+
+    .accordion {
+        width: 80%;
+    }
+
+    .accordion-body {
+        background-color: rgba(100, 134, 125, 0.3);
+        text-align: center;
+    }
+
+    .accordion-button {
+        background-color: #64867d;
+        color: white;
+    }
+
+    .accordion-button[aria-expanded="true"] {
+        background-color: rgba(100, 134, 125, 0.6);
+        color: white;
+    }
+
+    .accordion-button:after {
+      background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
+    }
+
+    .accordion-button:focus {
+        box-shadow: none;
+    }
+
+    .ligne {
+        border-bottom: solid black 1px;
+        padding-bottom: 1px;
+        padding-top: 5px;
+        width: 60%;
+        margin: auto;
+    }
+
+    .disposition {
+        width: 50%;
+    }
+
+    .enfants {
+        margin-top: 50%;
+    }
+
+</style>
+
+<h1>Prestations</h1>
+
+<div class="container mt-5 page ">
+
+    <div class="row">
+
+        <div class="col disposition">
+
+            <div class="femmes">
+
+{#                <h1>Femmes</h1>#}
+
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                    aria-controls="flush-collapseOne">
+                                Brushing
+                            </button>
+                        </h2>
+                        <div id="flush-collapseOne" class="accordion-collapse collapse"
+                             aria-labelledby="flush-headingOne"
+                             data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <div class="row ligne">
+                                    <div class="col">
+                                        courts
+                                    </div>
+                                    <div class="col">
+                                        50.-
+                                    </div>
+                                </div>
+                                <div class="row ligne">
+                                    <div class="col">
+                                        longs
+                                    </div>
+                                    <div class="col">
+                                        65.-
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseTwo" aria-expanded="false"
+                                    aria-controls="flush-collapseTwo">
+                                Coupe-brushing
+                            </button>
+                        </h2>
+                        <div id="flush-collapseTwo" class="accordion-collapse collapse"
+                             aria-labelledby="flush-headingTwo"
+                             data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <div class="row ligne">
+                                    <div class="col">
+                                        courts
+                                    </div>
+                                    <div class="col">
+                                        85.-
+                                    </div>
+                                </div>
+                                <div class="row ligne">
+                                    <div class="col">
+                                        longs
+                                    </div>
+                                    <div class="col">
+                                        93.-
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseThree" aria-expanded="false"
+                                    aria-controls="flush-collapseThree">
+                                Coloration-brushing
+                            </button>
+                        </h2>
+                        <div id="flush-collapseThree" class="accordion-collapse collapse"
+                             aria-labelledby="flush-headingThree"
+                             data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <div class="row ligne">
+                                    <div class="col">
+                                        courts
+                                    </div>
+                                    <div class="col">
+                                        127.-
+                                    </div>
+                                </div>
+                                <div class="row ligne">
+                                    <div class="col">
+                                        longs
+                                    </div>
+                                    <div class="col">
+                                        144.-
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingFour">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseFour" aria-expanded="false"
+                                    aria-controls="flush-collapseFour">
+                                Coloration-coupe-brushing
+                            </button>
+                        </h2>
+                        <div id="flush-collapseFour" class="accordion-collapse collapse"
+                             aria-labelledby="flush-headingFour"
+                             data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <div class="row ligne">
+                                    <div class="col">
+                                        courts
+                                    </div>
+                                    <div class="col">
+                                        162.-
+                                    </div>
+                                </div>
+                                <div class="row ligne">
+                                    <div class="col">
+                                        longs
+                                    </div>
+                                    <div class="col">
+                                        188.-
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingFive">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseFive" aria-expanded="false"
+                                    aria-controls="flush-collapseFive">
+                                Permanente-brushing
+                            </button>
+                        </h2>
+                        <div id="flush-collapseFive" class="accordion-collapse collapse"
+                             aria-labelledby="flush-headingFive"
+                             data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <div class="row ligne">
+                                    <div class="col">
+                                        courts
+                                    </div>
+                                    <div class="col">
+                                        139.-
+                                    </div>
+                                </div>
+                                <div class="row ligne">
+                                    <div class="col">
+                                        longs
+                                    </div>
+                                    <div class="col">
+                                        157.-
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingSix">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseSix" aria-expanded="false"
+                                    aria-controls="flush-collapseSix">
+                                Permanente-coupe-brushing
+                            </button>
+                        </h2>
+                        <div id="flush-collapseSix" class="accordion-collapse collapse"
+                             aria-labelledby="flush-headingSix"
+                             data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <div class="row ligne">
+                                    <div class="col">
+                                        courts
+                                    </div>
+                                    <div class="col">
+                                        168.-
+                                    </div>
+                                </div>
+                                <div class="row ligne">
+                                    <div class="col">
+                                        longs
+                                    </div>
+                                    <div class="col">
+                                        189.-
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingSeven">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseSeven" aria-expanded="false"
+                                    aria-controls="flush-collapseSeven">
+                                Chignon
+                            </button>
+                        </h2>
+                        <div id="flush-collapseSeven" class="accordion-collapse collapse"
+                             aria-labelledby="flush-headingSeven"
+                             data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <div class="row ligne">
+                                    <div class="col">
+                                        courts
+                                    </div>
+                                    <div class="col">
+                                        68.-
+                                    </div>
+                                </div>
+                                <div class="row ligne">
+                                    <div class="col">
+                                        longs
+                                    </div>
+                                    <div class="col">
+                                        94.-
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingHeight">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseHeight" aria-expanded="false"
+                                    aria-controls="flush-collapseHeight">
+                                Balayage ou Mèches
+                            </button>
+                        </h2>
+                        <div id="flush-collapseHeight" class="accordion-collapse collapse"
+                             aria-labelledby="flush-headingHeight"
+                             data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <div class="row ligne">
+                                    <div class="col">
+                                        De 40.- à 150-
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingNine">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseNine" aria-expanded="false"
+                                    aria-controls="flush-collapseNine">
+                                Forfait mariage (essai + jour J)
+                            </button>
+                        </h2>
+                        <div id="flush-collapseNine" class="accordion-collapse collapse"
+                             aria-labelledby="flush-headingNine"
+                             data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <div class="row ligne">
+                                    <div class="col">
+                                        300.-
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingTen">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseTen" aria-expanded="false"
+                                    aria-controls="flush-collapseTen">
+                                Soins
+                            </button>
+                        </h2>
+                        <div id="flush-collapseTen" class="accordion-collapse collapse"
+                             aria-labelledby="flush-headingTen"
+                             data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <div class="row ligne">
+                                    <div class="col">
+                                        courts
+                                    </div>
+                                    <div class="col">
+                                        10.-
+                                    </div>
+                                </div>
+                                <div class="row ligne">
+                                    <div class="col">
+                                        longs
+                                    </div>
+                                    <div class="col">
+                                        20.-
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingEleven">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseEleven" aria-expanded="false"
+                                    aria-controls="flush-collapseEleven">
+                                Traitement Kératine
+                            </button>
+                        </h2>
+                        <div id="flush-collapseEleven" class="accordion-collapse collapse"
+                             aria-labelledby="flush-headingEleven"
+                             data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <div class="row ligne">
+                                    <div class="col">
+                                        courts
+                                    </div>
+                                    <div class="col">
+                                        120.-
+                                    </div>
+                                </div>
+                                <div class="row ligne">
+                                    <div class="col">
+                                        longs
+                                    </div>
+                                    <div class="col">
+                                        190.-
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingTwelve">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseTwelve" aria-expanded="false"
+                                    aria-controls="flush-collapseTwelve">
+                                Lissage Brésilien
+                            </button>
+                        </h2>
+                        <div id="flush-collapseTwelve" class="accordion-collapse collapse"
+                             aria-labelledby="flush-headingTwelve"
+                             data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <div class="row ligne">
+                                    <div class="col">
+                                        courts
+                                    </div>
+                                    <div class="col">
+                                        400.-
+                                    </div>
+                                </div>
+                                <div class="row ligne">
+                                    <div class="col">
+                                        longs
+                                    </div>
+                                    <div class="col">
+                                        600.-
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+{#        <div class="col disposition">#}
+{##}
+{#            <div class="row">#}
+{##}
+{#                <div class="hommes">#}
+{#                    <h1>Hommes</h1>#}
+{##}
+{#                    <div class="accordion accordion-flush" id="accordionFlushHommes">#}
+{#                        <div class="accordion-item">#}
+{#                            <h2 class="accordion-header" id="flush-headingHommesUn">#}
+{#                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"#}
+{#                                        data-bs-target="#flush-collapseHommesUn" aria-expanded="false"#}
+{#                                        aria-controls="flush-collapseHommesUn">#}
+{#                                    Coupe Homme#}
+{#                                </button>#}
+{#                            </h2>#}
+{#                            <div id="flush-collapseHommesUn" class="accordion-collapse collapse"#}
+{#                                 aria-labelledby="flush-headingHommesUn" data-bs-parent="#accordionFlushHommes">#}
+{#                                <div class="accordion-body">#}
+{#                                    <div class="row  ligne">#}
+{#                                        <div class="col">#}
+{#                                            45.-#}
+{#                                        </div>#}
+{##}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="enfants">#}
+{#                <h1>Enfants</h1>#}
+{##}
+{#                <div class="accordion accordion-flush" id="accordionFlushEnfants">#}
+{#                    <div class="accordion-item">#}
+{#                        <h2 class="accordion-header" id="flush-headingEnfantsUn">#}
+{#                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"#}
+{#                                    data-bs-target="#flush-collapseEnfantsUn" aria-expanded="false"#}
+{#                                    aria-controls="flush-collapseEnfantsUn">#}
+{#                                Coupe Enfant#}
+{#                            </button>#}
+{#                        </h2>#}
+{#                        <div id="flush-collapseEnfantsUn" class="accordion-collapse collapse"#}
+{#                             aria-labelledby="flush-headingEnfantsUn" data-bs-parent="#accordionFlushEnfants">#}
+{#                            <div class="accordion-body">#}
+{#                                <div class="row  ligne">#}
+{#                                    <div class="col">#}
+{#                                        30.-#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="accordion-item">#}
+{#                        <h2 class="accordion-header" id="flush-headingEnfantsDeux">#}
+{#                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"#}
+{#                                    data-bs-target="#flush-collapseEnfantsDeux" aria-expanded="false"#}
+{#                                    aria-controls="flush-collapseEnfantsDeux">#}
+{#                                Coupe Jeunesse (-18 ans)#}
+{#                            </button>#}
+{#                        </h2>#}
+{#                        <div id="flush-collapseEnfantsDeux" class="accordion-collapse collapse"#}
+{#                             aria-labelledby="flush-headingEnfantsDeux" data-bs-parent="#accordionFlushEnfants">#}
+{#                            <div class="accordion-body">#}
+{##}
+{##}
+{#                                <div class="accordion accordion-flush" id="accordionFlushJeunesse">#}
+{#                                    <div class="accordion-item">#}
+{#                                        <h2 class="accordion-header" id="flush-headingJeunesseUn">#}
+{#                                            <button class="accordion-button collapsed" type="button"#}
+{#                                                    data-bs-toggle="collapse"#}
+{#                                                    data-bs-target="#flush-collapseJeunesseUn" aria-expanded="false"#}
+{#                                                    aria-controls="flush-collapseJeunesseUn">#}
+{#                                                Fille#}
+{#                                            </button>#}
+{#                                        </h2>#}
+{#                                        <div id="flush-collapseJeunesseUn" class="accordion-collapse collapse"#}
+{#                                             aria-labelledby="flush-headingJeunesseUn"#}
+{#                                             data-bs-parent="#accordionFlushJeunesse">#}
+{#                                            <div class="accordion-body">#}
+{#                                                <div class="row  ligne">#}
+{#                                                    <div class="col">#}
+{#                                                        45.- / 55.-#}
+{#                                                    </div>#}
+{##}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{##}
+{#                                    <div class="accordion-item">#}
+{#                                        <h2 class="accordion-header" id="flush-headingJeunesseDeux">#}
+{#                                            <button class="accordion-button collapsed" type="button"#}
+{#                                                    data-bs-toggle="collapse"#}
+{#                                                    data-bs-target="#flush-collapseJeunesseDeux" aria-expanded="false"#}
+{#                                                    aria-controls="flush-collapseJeunesseDeux">#}
+{#                                                Garçon#}
+{#                                            </button>#}
+{#                                        </h2>#}
+{#                                        <div id="flush-collapseJeunesseDeux" class="accordion-collapse collapse"#}
+{#                                             aria-labelledby="flush-headingJeunesseDeux"#}
+{#                                             data-bs-parent="#accordionFlushJeunesse">#}
+{#                                            <div class="accordion-body">#}
+{#                                                <div class="row  ligne">#}
+{#                                                    <div class="col">#}
+{#                                                        35.-#}
+{#                                                    </div>#}
+{##}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{##}
+{##}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+
+
+{#        </div>#}
+    </div>
+</div>
+{% endblock %}

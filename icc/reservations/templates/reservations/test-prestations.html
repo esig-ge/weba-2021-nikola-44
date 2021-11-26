@@ -1,0 +1,165 @@
+{#FERREIRA STOJKOVIC Nikola#}
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <style>
+        .page {
+            min-height: 1200px;
+        }
+
+        .accordion {
+            width: 80%;
+        }
+
+        .accordion-body {
+            background-color: rgba(100, 134, 125, 0.3);
+            text-align: center;
+        }
+
+        .accordion-button {
+            background-color: #64867d;
+            color: white;
+        }
+
+        .accordion-button[aria-expanded="true"] {
+            background-color: rgba(100, 134, 125, 0.6);
+            color: white;
+        }
+
+        .accordion-button:after {
+            background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
+        }
+
+        .accordion-button:focus {
+            box-shadow: none;
+        }
+
+        .ligne {
+            border-bottom: solid black 1px;
+            padding-bottom: 1px;
+            padding-top: 5px;
+            width: 60%;
+            margin: auto;
+        }
+    </style>
+
+    <h1>Liste des prestations</h1>
+
+    <div class="container mt-5 page ">
+
+        <div class="row">
+            <div class="col">
+
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+
+                    {% for nom, prix in dico.items %}
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#prestation-{{ forloop.counter }}" aria-expanded="false"
+                                        aria-controls="flush-collapseOne">
+                                    {{ nom }}
+                                </button>
+                            </h2>
+                            <div id="prestation-{{ forloop.counter }}" class="accordion-collapse collapse"
+                                 aria-labelledby="flush-headingOne"
+                                 data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <div class="row ligne">
+                                        <div class="col">
+                                            Cheveux courts
+                                        </div>
+                                        <div class="col">
+                                           CHF {{ prix.0 }}
+                                        </div>
+                                    </div>
+                                    <div class="row ligne">
+                                        <div class="col">
+                                           Cheveux longs
+                                        </div>
+                                        <div class="col">
+                                           CHF {{ prix.1 }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% for prestation in prestations %}
+                        {% if prestation.pour == '/' %}
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingOne">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#prestation-{{ prestation.id }}" aria-expanded="false"
+                                            aria-controls="flush-collapseOne">
+                                        {{ prestation.nom }}
+                                    </button>
+                                </h2>
+                                <div id="prestation-{{ prestation.id }}" class="accordion-collapse collapse"
+                                     aria-labelledby="flush-headingOne"
+                                     data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        <div class="row ligne">
+                                            <div class="col">
+                                                {{ prestation.prix.to_integral }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+
+{#            <div class="col">#}
+{#                <h1>Autres coupes</h1>#}
+{##}
+{#                <div class="accordion accordion-flush" id="accordionFlushExample">#}
+{##}
+{#                    {% for prestation in prestations %}#}
+{#                        {% if prestation.pour == '/' %}#}
+{##}
+{#                            <div class="accordion-item">#}
+{#                                <h2 class="accordion-header" id="flush-headingOne">#}
+{#                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"#}
+{#                                            data-bs-target="#prestation-{{ prestation.id }}" aria-expanded="false"#}
+{#                                            aria-controls="flush-collapseOne">#}
+{#                                        {{ prestation.nom }}#}
+{#                                    </button>#}
+{#                                </h2>#}
+{#                                <div id="prestation-{{ prestation.id }}" class="accordion-collapse collapse"#}
+{#                                     aria-labelledby="flush-headingOne"#}
+{#                                     data-bs-parent="#accordionFlushExample">#}
+{#                                    <div class="accordion-body">#}
+{#                                        <div class="row ligne">#}
+{#                                            <div class="col">#}
+{#                                                {{ prestation.prix.to_integral }}#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        {% endif %}#}
+{#                    {% endfor %}#}
+{#                </div>#}
+{#            </div>#}
+        </div>
+    </div>
+
+{#    <script>#}
+{#        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))#}
+{#        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {#}
+{#            return new bootstrap.Popover(popoverTriggerEl)#}
+{#        })#}
+{##}
+{#        var popover = new bootstrap.Popover(document.querySelector('.btn'), {#}
+{#            container: 'body'#}
+{#        })#}
+{##}
+{##}
+{#    </script>#}
+{% endblock %}

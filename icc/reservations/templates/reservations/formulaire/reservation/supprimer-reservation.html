@@ -1,0 +1,16 @@
+{#FERREIRA STOJKOVIC Nikola#}
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <br><br><h3>Etes-vous sur de vouloir supprimer cette prestation ?</h3><br><br>
+        <p>Client: {{ reservation.client }}</p>
+        <p>Date et heure: {{ reservation.date_heure }}</p>
+        <p>Prestations: {{ reservation.prestations }}</p>
+        <p>Commentaire: {{ reservation.commentaire }}</p>
+    <form action="{% url 'supprimer-reservation' reservation.id %}" method="post">
+        {% csrf_token %}
+        <a class="btn btn-warning" href="{% url 'mes-reservations' %}">Annuler</a>
+        <input class="btn btn-danger" type="submit" value="Confirmer">
+    </form>
+{% endblock %}

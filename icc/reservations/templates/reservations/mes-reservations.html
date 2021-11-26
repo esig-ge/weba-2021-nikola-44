@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load template_filters %}
+
+{% block content %}
+    {% now "D d M Y" as aujourdhui %}
+    <div class="container pb-5 page">
+        <div class="row">
+            <div class="col" id="d">
+                <h1>Mes réservations</h1>
+            </div>
+            <div class="col">
+                <a href="{% url 'ajouter-reservation' %}" class="float-end text-white">
+                    <span class="btn btn-primary">Réserver</span>
+                </a>
+            </div>
+        </div>
+
+        {% for reservation in reservations %}
+            {% if not reservation.is_past_due %}
+                <div class="row mt-5 mb-5 justify-content-center border border-5 border-dark">
+                    <div class="col text-end py-1">
+                        <a href="{% url 'supprimer-reservation' reservation.id %}">
+                        <div class="col-1 text-center fw-bold border border-3 border-dark rounded ms-auto py-1">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="black"
+                                     class="bi bi-trash" viewBox="0 0 16 16">
+                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"></path>
+                                    <path fill-rule="evenodd"
+                                          d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"></path>
+                                </svg>
+
+                        </div>
+                            </a>
+                    </div>
+                    <div class="row d-flex mt-3">
+                        <div class="col w-auto">
+                            <h1 class="float-start text-decoration-underline">
+                                Réservation du {{ reservation.date_heure.date }}
+                            </h1>
+                        </div>
+                        <div class="col-3 ms-auto">
+                            <h1 class="float-end">
+                                {{ reservation.date_heure.time }}-{{ reservation.heure_fin.astimezone.time }}
+                            </h1>
+                        </div>
+                    </div>
+                    <div class="row justify-content-end d-flex">
+                        {#                        <table class="table">#}
+                        {#                            <thead>#}
+                        {#                            <tr>#}
+                        {#                                <th scope="col"></th>#}
+                        {#                                <th scope="col">Prestation</th>#}
+                        {#                                <th scope="col">Pour</th>#}
+                        {#                                <th scope="col">Durée</th>#}
+                        {#                                <th scope="col">Prix</th>#}
+                        {#                            </tr>#}
+                        {#                            </thead>#}
+                        {#                            <tbody>#}
+                        {##}
+                        {% for prestation in reservation.prestations.all %}
+                            {#                            <tr>#}
+                            {#                                <th scope="row">{{ forloop.counter }}</th>#}
+                            {#                                <td>{{ prestation.nom }}</td>#}
+                            {#                                <td>{{ prestation.pour }}</td>#}
+                            {#                                <td>{{ prestation.duree }}</td>#}
+                            {#                                <td>{{ prestation.prix }}</td>#}
+                            {#                            </tr>#}
+                            {#                            </tbody>#}
+                            {#                        </table>#}
+                            <div class="row my-1">
+                                <h3 class="col-5">{{ prestation.nom }} - {{ prestation.pour }}</h3>
+                                {% if prestation.duree.hour and not prestation.duree.minute %}
+                                    <h3 class="col-3">{{ prestation.duree.hour }}h.</h3>
+                                {% elif prestation.duree.minute and not prestation.duree.hour %}
+                                    <h3 class="col-3">{{ prestation.duree.minute }}min.</h3>
+                                {% else %}
+                                    <h3 class="col-3">{{ prestation.duree.hour }}h.{{ prestation.duree.minute }}min.</h3>
+                                {% endif %}
+                                <h3 class="col-3">{{ prestation.prix }} CHF</h3>
+                                {#                                {% for ligne in res_pres %}#}
+                                {#                                    {% if ligne.reservation.id == reservation.id and ligne.prestation.id == prestation.id %}#}
+                                {#                                        <h3 class="col">Prix effectif: {{ ligne.prix }}</h3>#}
+                                {#                                        <h3 class="col">Durée effective: {{ ligne.duree_effective }}</h3>#}
+                                {#                                    {% endif %}#}
+                                {#                                {% endfor %}#}
+                            </div>
+                        {% endfor %}
+                        <div class="container bg-dark my-2" style="height: 150px; width: 95%; --bs-bg-opacity: .2;">
+                            <h2 class="mt-2">Commentaires:</h2>
+                            <h5>
+                                {{ reservation.commentaire }}
+                            </h5>
+                        </div>
+                        {#                        <div class="col align-self-end justify-content-end">#}
+                    </div>
+                    <h3 class="col-4 ms-auto border-top border-3 border-dark mb-3 pt-2">Total: {{ total|lookup:reservation.id }}
+                        CHF</h3>
+                    {#                        </div>#}
+                </div>
+
+            {% else %}
+                {#                anciennes réservations à afficher si il clique sur le lien #}
+            {% endif %}
+        {% endfor %}
+        <a href="{%  url 'reservations' %}">Voir toutes mes réservations</a>
+    </div>
+
+{% endblock %}

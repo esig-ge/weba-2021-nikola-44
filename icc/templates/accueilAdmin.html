@@ -1,0 +1,53 @@
+{#Zumeri Faton et Dorian Châtelain#}
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <style>
+        .btn-primary {
+            height: 200px;
+            width: 200px;
+        }
+    </style>
+
+    <div class="container page p-5">
+        <h1>Que souhaitez-vous modifier ?</h1>
+        <div class="div m-5">
+            <div class="row">
+                <div class="col d-flex justify-content-center">
+                    <button type="button" class="btn btn-primary btn-lg my-5"
+                            onclick="location.href='{% url 'produits:gererProduit' %}'">Produits
+                    </button>
+                </div>
+                <div class="col text-white d-flex justify-content-center">
+                    <button type="button" class="btn btn-primary btn-lg my-5" onclick="location.href='{% url 'test' %}'">Réservations</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col d-flex justify-content-center">
+                    <a href="../compte/gererClients/">
+                    <button type="button" class="btn btn-primary btn-lg my-5">Clients
+                    </button></a>
+                </div>
+                <div class="col d-flex justify-content-center">
+                    <button type="button" class="btn btn-primary btn-lg my-5"
+                            onclick="location.href='{% url 'prestations-admin' %}'">Prestations
+                    </button>
+                </div>
+            </div>
+             <div class="row">
+                <div class="col d-flex justify-content-center">
+                    <a href="../parametres/gererSalon">
+                    <button type="button" class="btn btn-primary btn-lg my-5">Salon
+                    </button></a>
+                </div>
+                <div class="col d-flex justify-content-center">
+                    <button type="button" class="btn btn-primary btn-lg my-5"
+                            onclick="location.href='{% url 'gererCommande' %}'">Commandes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

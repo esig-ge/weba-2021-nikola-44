@@ -1,0 +1,57 @@
+{#FERREIRA STOJKOVIC Nikola#}
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+    {#    <div class="col-md-7">#}
+    <h4>Les prestations</h4>
+    <BR><BR>
+    <div class="container pb-5">
+        <div class="card card-body mb-5">
+            <button type="button" class="btn btn-primary btn-lg"
+                    onclick="location.href='{% url 'ajouter-prestation' %}'">Ajouter prestation
+            </button>
+            {#            <a class="btn " style="color: #7FFFD4; background-color: #3d3d3f" href="{% url 'ajouter-prestation' %}">Ajouter#}
+            {#                une prestation</a>#}
+            <hr>
+
+            <table class="table w-100">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Pour</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col">Durée</th>
+                        <th scope="col">Mise à jour</th>
+                        <th scope="col">Supprimer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for prestation in prestations %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ prestation.nom }}</td>
+                        <td>{{ prestation.pour }}</td>
+                        <td>{{ prestation.prix }}</td>
+                        {% if prestation.duree.hour and not prestation.duree.minute %}
+                            <td>{{ prestation.duree.hour }}h.</td>
+                        {% elif prestation.duree.minute and not prestation.duree.hour %}
+                            <td>{{ prestation.duree.minute }}min.</td>
+                        {% else %}
+                            <td>{{ prestation.duree.hour }}h.{{ prestation.duree.minute }}min.</td>
+                        {% endif %}
+                        <td><a class='btn btn-sm btn-dark'
+                               href="{% url 'modifier-prestation' prestation.id %}">Modifier</a></td>
+                        <td><a class='btn btn-sm btn-danger'
+                               href="{% url 'supprimer-prestation' prestation.id %}">Supprimer</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

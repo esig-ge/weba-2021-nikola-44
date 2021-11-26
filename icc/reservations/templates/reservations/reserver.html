@@ -1,0 +1,15 @@
+{#FERREIRA STOJKOVIC Nikola#}
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="form-rdv">
+        <h2>Prendre rendez-vous</h2>
+        <form class="rendezvous" action="{% url 'rendezvous' %}" method="post">
+            {% csrf_token %}
+                {{ form.as_p }}
+            <input type="submit" value="Ajouter">
+        </form>
+    </div>
+
+{% endblock %}

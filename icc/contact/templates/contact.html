@@ -1,0 +1,47 @@
+{# Zumeri Faton #}
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Contact</title>
+    </head>
+    <body>
+    <h1>Nous contacter</h1>
+    <br><br><br>
+    <table width="75%">
+        <tr>
+            <th><i><u>Salon</u></i></th>
+            <th><i><u>Téléphone</u></i></th>
+        </tr>
+        <tr>
+            <td style="padding-top: 15px">{{ parametres.nomSalon }}</td>
+            <td style="padding-top: 15px">+{{ parametres.telephone }}</td>
+        </tr>
+        <tr>
+            <td>{{ parametres.adresse }} <br> {{ parametres.codePostal }}</td>
+            <td></td>
+        </tr>
+    </table>
+    <br><br>
+    <form class="{% url 'contact' %}" method="POST">
+        {% csrf_token %}
+        <div class="col-sm my-auto">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3367.147749366162!2d6.264583680598971!3d46.2335393569716!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478c6e8ec09f83cb%3A0xd3f82b913d7969cc!2sChem.%20des%20Pr%C3%A9s-Seigneur%2027%2C%201254%20Jussy!5e1!3m2!1sfr!2sch!4v1632382534294!5m2!1sfr!2sch"
+                    width="500" height="400" style="float: right; width: 50%" loading="lazy"></iframe>
+        </div>
+        <div class="col-sm-4">
+            {{ form.as_p }}
+        </div>
+        <br><br>
+        <button type="submit" class="btn btn-primary">Envoyer</button>
+    </form>
+
+    <br><br>
+    </body>
+    </html><br><br><br><br><br>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{#Zumeri Faton et Dorian Châtelain#}
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+    {#    <div class="col-md-7">#}
+    <h4>Les commandes</h4>
+    <BR><BR>
+    <div class="card card-body">
+        <table class="table table-sm">
+            <tr>
+                <th>Client</th>
+                <th>Date commande</th>
+                <th>Complete</th>
+                <th>Statut commande</th>
+            </tr>
+            {% for n in commande %}
+                <tr>
+                    <th><p>{{ n.client }}</p></th>
+                    <th><p>{{ n.date_commande }}</p></th>
+                    <th><p>{{ n.complete }}</p></th>
+                    <th><p>{{ n.statut_commande }}</p></th>
+                    <th><p>{{ n.quantite }}</p></th>
+                    <th><a class='btn btn-sm btn-dark' href="{% url 'modifier_commande' n.id %}">Modifier</a>
+                    </th>
+                    <th><a class='btn btn-sm btn-danger'
+                           href="{% url 'supprimer_commande' n.id %}">Supprimer</a></th>
+                </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+    </div>
+{% endblock %}

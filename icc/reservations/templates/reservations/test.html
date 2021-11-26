@@ -1,0 +1,206 @@
+{#FERREIRA STOJKOVIC Nikola#}
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <!--Bouton du modal -->
+    <button type="button" class="btn btn-primary float-end" onclick="location.href='{% url 'ajouter-reservation' %}'">
+        Prendre rendez-vous
+    </button>
+
+
+    <!-- Titre -->
+    <h1>Planning des réservations</h1>
+    <p id="test"></p>
+
+
+    <!-- Contenu de la page -->
+    <div class="container mt-5 planning">
+
+        <!--    Navbar date -->
+        <div class="row">
+
+            <!--        Fleche de gauche -->
+            <div class="col-sm-1 float-left">
+                <a href="#" id="subDay">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="black"
+                         class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+                        <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"></path>
+                    </svg>
+                </a>
+            </div>
+
+            <!--        Date -->
+            <div class="col-sm-3 m-auto text-center fw-bold">
+                <p id="date"></p>
+            </div>
+
+            <!--        Fleche de droite -->
+            <div class="col-sm-1 float-right text-end">
+                <a href="#" id="addDay">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="black"
+                         class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                        <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+
+        <!--    Block des reservations -->
+
+        <div class="row mt-5 mb-5 pb-5 justify-content-center">
+
+
+            <!--        Ligne de reservations (du matin) -->
+            <div class="row justify-content-around mt-3">
+                <h4>Matin</h4>
+
+                <!--            Block d'une reservation-->
+                {% for reservation in r_matin %}
+
+                    <div class="col-sm-2 text-center p-1 justify-content-center m-1 reservationr modele">
+                        <div class="modif align-self-start" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                 class="bi bi-pencil-square float-end" viewBox="0 0 16 16">
+                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"></path>
+                                <path fill-rule="evenodd"
+                                      d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"></path>
+                            </svg>
+                        </div>
+
+                        <div class="heure fw-bold mt-5">{{ reservation.heure }} - {{ reservation.heure_fin }}</div>
+                        <div class="heure fw-bold mt-5">{{ reservation.prix_total }}</div>
+                        <div class="heure fw-bold mt-5">
+                            {% for prestation in reservation.liste_prestations %}
+                                {% if forloop.counter > 1 %}
+                                    , {{ prestation }}
+                                {% else %}
+                                    {{ prestation }}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+
+
+                        <!--                <p class="heure fw-bold d-inline-block align-middle w100 mt-5">8h00 - 8h45</p>-->
+                    </div>
+                {% endfor %}
+
+
+            </div>
+
+
+            <!--        Ligne de test -->
+            <div class="row justify-content-around mt-3">
+                <h4>Après-midi</h4>
+
+
+                <!--            Block d'une réservation-->
+                {% for reservation in r_apresmidi %}
+
+
+                    <div class="col-sm-2 text-center p-1 justify-content-center m-1 reservationr modele">
+                        <div class="modif align-self-start" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                 class="bi bi-pencil-square float-end" viewBox="0 0 16 16">
+                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"></path>
+                                <path fill-rule="evenodd"
+                                      d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"></path>
+                            </svg>
+                        </div>
+                        <div class="heure fw-bold mt-5">{{ reservation.heure }} - {{ reservation.heure_fin }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+
+        <!--    Légendes des couleurs -->
+        <div class="row float-end">
+            <div class="row row-cols-2">
+                <div class="col-sm-1 couleur-reserve">
+                </div>
+                <p>Réservé</p>
+            </div>
+            <div class="row row-cols-2 mt-1">
+                <div class="col-sm-1 couleur-libre">
+                </div>
+                <p>Libre</p>
+            </div>
+        </div>
+
+        <script>
+
+            function sendDay(x) {
+                let date = x
+                const request = new XMLHttpRequest()
+                request.open('GET', `/test/${JSON.stringify(date)}`)
+                request.onload = () => {
+                    const djangoMessage = request.responseText
+                    console.log(djangoMessage)
+                }
+                request.send()
+            }
+
+
+            {# Affiche la date #}
+
+            function affichage(n) {
+                y = n.getFullYear();
+                m = n.toLocaleString('default', {month: 'long'})
+                d = n.getDate();
+                j = n.toLocaleDateString('default', {weekday: 'long'});
+                document.getElementById("date").innerHTML = j.replace(/^\w/, (c) => c.toUpperCase()) + ", " + d + " " + m + " " + y;
+                date = n
+                console.log(date)
+            }
+
+            {# Initialise la date du jour du système et l'affiche #}
+            n = new Date();
+            affichage(n)
+
+            {# Stocke les flèches du calendrier dans des variables #}
+            var addDay = document.querySelector('#addDay')
+            var subDay = document.querySelector('#subDay')
+
+            {# Crée une fonction qui ajoute le nombre de jour en paramètre à la date du jour #}
+            Date.prototype.addDays = function (days) {
+                var date = new Date();
+                date.setDate(date.getDate() + days);
+                return date;
+            }
+
+            {# Crée un compteur qui suit la navigation dans le calendrier #}
+            var cpt = 0;
+
+            {# Compte le nombre de clicks sur la flèche droite du calendrier, met à jour la date et l'affiche #}
+            addDay.onclick = (function outer() {
+                let counter = 0;
+                return function inner() {
+                    counter++;
+                    cpt++;
+                    x = n.addDays(cpt)
+                    affichage(x)
+
+                    console.log(cpt)
+                    console.log('ID:' + addDay.id + 'Number of clicks: ' + counter);
+                };
+            })();
+
+            {# Compte le nombre de clicks sur la flèche gauche du calendrier, met à jour la date et l'affiche #}
+            subDay.onclick = (function outer() {
+                let counter = 0;
+                return function inner() {
+                    counter++;
+                    cpt--;
+                    x = n.addDays(cpt)
+                    affichage(x)
+                    console.log(cpt)
+                    console.log('ID:' + subDay.id + 'Number of clicks: ' + counter);
+                };
+            })();
+
+        </script>
+
+    </div>
+{% endblock %}

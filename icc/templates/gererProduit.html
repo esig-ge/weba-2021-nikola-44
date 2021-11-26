@@ -1,0 +1,49 @@
+{#Zumeri Faton et Dorian Châtelain#}
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+    {#    <div class="col-md-7">#}
+    <h4>Les produits</h4>
+    <BR><BR>
+    <div class="card card-body">
+        <a class="btn " style="color: #7FFFD4; background-color: #3d3d3f" href="{% url 'produits:ajouter_produit' %}">Ajouter
+            un produit</a>
+        <hr>
+        <table class="table table-sm">
+            <tr>
+                <th>Produit</th>
+                <th>Type</th>
+                <th>ml.</th>
+                <th>Catégorie</th>
+                <th>Prix d'achat</th>
+                <th>Prix de vente</th>
+                <th>Statut</th>
+                <th>Quantité</th>
+                <th>Mise à Jour</th>
+                <th>Supprimer</th>
+            </tr>
+            {% for n in produits %}
+                <tr>
+                    <th><p>{{ n.nom }}</p></th>
+                    <th><p>{{ n.type }}</p></th>
+                    <th><p>{{ n.capacite }}</p></th>
+                    <th><p>{{ n.categorie }}</p></th>
+                    <th><p>CHF {{ n.prix_achat }}</p></th>
+                    <th><p>CHF {{ n.prix_vente }}</p></th>
+                    <th><p>{{ n.statut }}</p></th>
+                    <th><p>{{ n.quantite }}</p></th>
+                    <th><a class='btn btn-sm btn-dark' href="{% url 'produits:modifier_produit' n.id %}">Modifier</a>
+                    </th>
+                    <th><a class='btn btn-sm btn-danger'
+                           href="{% url 'produits:supprimer_produit' n.id %}">Supprimer</a></th>
+                </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+    </div>
+
+{% endblock %}

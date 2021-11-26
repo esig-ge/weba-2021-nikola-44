@@ -1,0 +1,16 @@
+{#FERREIRA STOJKOVIC Nikola#}
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-sm-4">
+            <h4 class="alert alert-info">Ajouter prestation</h4>
+            <form action="{% url 'ajouter-prestation' %}" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" class="btn btn-success" value="Ajouter prestation">
+            </form>
+        </div>
+    </div>
+{% endblock %}

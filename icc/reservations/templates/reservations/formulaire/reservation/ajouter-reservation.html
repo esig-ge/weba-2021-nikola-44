@@ -1,0 +1,16 @@
+{#FERREIRA STOJKOVIC Nikola#}
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-sm-4">
+            <h4 class="alert alert-info">Ajouter réservation</h4>
+            <form action="{% url 'ajouter-reservation' %}" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" class="btn btn-success" value="Ajouter réservation">
+            </form>
+        </div>
+    </div>
+{% endblock %}

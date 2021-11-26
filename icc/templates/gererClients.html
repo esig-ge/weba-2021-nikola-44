@@ -1,0 +1,41 @@
+{# Dorian Châtelain#}
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>Souhaitez-vous ajouter des clients ?</h1><br><br><br>
+
+    <div class="col">
+        <h5>Clients:</h5>
+        <hr>
+        <div class="card card-body">
+            <table class="table table-sm">
+                <tr>
+                    <th>Username</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Téléphone</th>
+                    <th>Genre</th>
+                    <th>Commentaire</th>
+                    <th>Mise à Jour</th>
+                    <th>Supprimer</th>
+                </tr>
+                {% for client in clients %}
+                    <tr>
+                        <th>{{ client.user }}</th>
+                        <th>{{ client.nom }}</th>
+                        <th>{{ client.prenom }}</th>
+                        <th>{{ client.telephone }}</th>
+                        <th>{{ client.genre }}</th>
+                        <th>{{ client.commentaire }}</th>
+                        <th><a class='btn btn-sm btn-dark' href="{% url 'modifier_client' client.id %}">Modifier</a>
+                        </th>
+                        <th><a class='btn btn-sm btn-danger' href="{% url 'supprimer_client' client.id %}">Supprimer</a>
+                        </th>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{#Zumeri Faton et Dorian Châtelain#}
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="row frms">
+        <div class="col-sm-4">
+            <h4 class="alert alert-info">Ajouter produit</h4>
+            <form action="{% url 'produits:ajouter_produit' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" href="{% url 'produits:gererProduit' %}" class="btn btn-success"
+                       value="Ajouter produit">
+            </form>
+        </div>
+    </div>
+{% endblock %}

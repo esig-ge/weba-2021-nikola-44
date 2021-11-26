@@ -1,0 +1,121 @@
+{#Zumeri Faton #}
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Accueil{% endblock %}
+
+{% block content %}
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Accueil</title>
+    </head>
+    <body>
+    <h1 class="titreAccueil">Catisa Coiffure</h1><br><br>
+    {% if not request.user.is_authenticated %}
+        <h2>Veuillez vous conectez pour prendre rendez-vous et pour commander des produits.</h2>
+    {% endif %}
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <a href="{% url 'produits:home' %}"><img src="{% static 'media/color-stay-shampoo.jpg' %}"
+                                                         class="d-block w-100 carousel"></a>
+            </div>
+            <div class="carousel-item">
+                <a href="{% url 'prestations' %}"><img src="{% static 'media/lissage-bresil.png' %}"
+                                                       class="d-block w-100 carousel"></a>
+            </div>
+            <div class="carousel-item">
+                <a href="{% url 'produits:home' %}"><img src="{% static 'media/organic-balance-hydra-oil.jpg' %}"
+                                                         class="d-block w-100 carousel"></a>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+        <br><br><br><br><br>
+    </div>
+
+    <div class="mid-text">
+
+        <div class="titre-mid">
+            Love is in the hair
+        </div>
+        <br><br><br>
+
+        <div class="coiffure">
+            Envie de changement ?
+            Catisa vous propose des rendez-vous en ligne !
+            Cliquez
+            {% if request.user.is_authenticated %}
+                <button type="button" class="boutonRes"
+                        onclick="location.href='{% url 'reservations' %}'">ici
+                </button>
+            {% elif not request.user.is_authenticated %}
+                <button type="button" class="boutonRes"
+                        onclick="location.href='{% url 'acces' %}'">ici
+                </button>
+
+            {% endif %}
+            pour plus d'informations.
+        </div>
+        <br><br><br>
+
+        <div class="prestations">
+            Si vous souhaitez connaître les prix de toutes nos prestations, cliquez
+            <button type="button" class="boutonRes"
+                    onclick="location.href='{% url 'prestations' %}'">ici
+            </button>
+            pour plus de détails.
+        </div>
+        <br><br><br>
+
+        <div class="prestations">
+            Vous voulez de tout nouveaux produits ? Rendez-vous sur la page
+            <button type="button" class="boutonRes"
+                    onclick="location.href='{% url 'produits:home' %}'"> produits
+            </button>
+            !
+        </div>
+        <br><br><br>
+
+    </div>
+    <br><br><br><br><br>
+
+    <div class="bas-text"><br><br>
+
+        <div class="titre-mid">
+            Des questions ?
+        </div>
+        <br>
+
+        <div class="contact">
+            Rendez-vous sur la page
+            <button type="button" class="boutonCont"
+                    onclick="location.href='{% url 'contact' %}'">contact
+            </button>
+            .
+        </div>
+        <br><br>
+    </div><br>
+
+    </body>
+    </html>
+
+{% endblock %}
