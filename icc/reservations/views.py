@@ -152,7 +152,8 @@ def reservations(request):
 
 # PRESTATIONS
 
-
+@login_required
+@permission_required('is_staff')
 def prestations_admin(request):
     prestation = Prestation.objects.all().order_by('nom', 'pour')
     return render(request, 'reservations/admin/prestations.html', {'prestations': prestation})
