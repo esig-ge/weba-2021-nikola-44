@@ -7,7 +7,7 @@ from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.admin.view.decorators import staff_member_required
+from django.contrib.admin.views.decorators import staff_member_required
 
 
 from .models import Reservation, Prestation, ResPres
@@ -154,7 +154,7 @@ def reservations(request):
 
 # PRESTATIONS
 
-@member_staff_required
+@staff_member_required
 def prestations_admin(request):
     prestation = Prestation.objects.all().order_by('nom', 'pour')
     return render(request, 'reservations/admin/prestations.html', {'prestations': prestation})
