@@ -290,6 +290,7 @@
                 d = n.getDate();
                 j = n.toLocaleDateString('default', {weekday: 'long'});
                 document.getElementById("date").innerHTML = j.replace(/^\w/, (c) => c.toUpperCase()) + ", " + d + " " + m + " " + y;
+            {#    remplacer le noeud p #}
             }
 
             {# Initialise la date du jour du système et l'affiche #}
@@ -311,6 +312,7 @@
             var cpt = 0;
 
             {# Compte le nombre de clicks sur la flèche droite du calendrier, met à jour la date et l'affiche #}
+{#            passer par un addeventlistener et comprendre toutes les fonctionnalités, parenthèses utilisées  #}
             addDay.onclick = (function outer() {
                 let counter = 0;
                 return function inner() {
