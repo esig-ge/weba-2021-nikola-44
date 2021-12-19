@@ -34,7 +34,7 @@
             </div>
 
             <!--        Date -->
-            <div class="col-sm-3 m-auto text-center fw-bold">
+            <div id="div-date" class="col-sm-3 m-auto text-center fw-bold">
                 <p id="date"></p>
             </div>
 
@@ -165,7 +165,7 @@
         {#                                        <label for="date" class="col-form-label">Date:</label>#}
         {#                                    </div>#}
         {#                                    <div class="col">#}
-        {#                                        <input type="date" class="form-control" id="date">#}
+        {#                                        <input type="date" class="form-control" id="date-form">#}
         {#                                    </div>#}
         {#                                </div>#}
         {#                                <div class="row mb-3">#}
@@ -232,7 +232,7 @@
         {#                                        <label for="date" class="col-form-label">Date:</label>#}
         {#                                    </div>#}
         {#                                    <div class="col">#}
-        {#                                        <input type="date" class="form-control" id="date">#}
+        {#                                        <input type="date" class="form-control" id="date-form2">#}
         {#                                    </div>#}
         {#                                </div>#}
         {#                                <div class="row mb-3">#}
@@ -240,7 +240,7 @@
         {#                                        <label for="heure" class="col-form-label">heure:</label>#}
         {#                                    </div>#}
         {#                                    <div class="col">#}
-        {#                                        <input type="time" id="heure" class="form-control">#}
+        {#                                        <input type="time" id="heure-form" class="form-control">#}
         {#                                    </div>#}
         {#                                </div>#}
         {##}
@@ -282,6 +282,18 @@
 {#                // $('#addBookDialog').modal('show');#}
 {#            });#}
 
+
+            function creerElementP(){
+                var p = document.createElement("p");
+                document.getElementById("div-date").appendChild(p);
+                p.setAttribute("id", "p-js");
+                p.setAttribute("class", "bg-danger");
+            }
+
+            function supprimerElementP(){
+                document.getElementById("p-js").remove();
+            }
+
             {# Affiche la date #}
 
             function affichage(n) {
@@ -313,17 +325,19 @@
 
             {# Compte le nombre de clicks sur la flèche droite du calendrier, met à jour la date et l'affiche #}
 {#            passer par un addeventlistener et comprendre toutes les fonctionnalités, parenthèses utilisées  #}
-            addDay.onclick = (function outer() {
+            addDay.onclick = (function outer(a,b) {
                 let counter = 0;
                 return function inner() {
                     counter++;
                     cpt++;
                     x = n.addDays(cpt)
                     affichage(x)
+                    b()
+                    a()
                     console.log(cpt)
                     console.log('ID:' + addDay.id + 'Number of clicks: ' + counter);
                 };
-            })();
+            })(creerElementP(),supprimerElementP());
 
             {# Compte le nombre de clicks sur la flèche gauche du calendrier, met à jour la date et l'affiche #}
             subDay.onclick = (function outer() {
