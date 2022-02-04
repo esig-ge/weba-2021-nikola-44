@@ -39,7 +39,7 @@ urlpatterns = [
     path('contact/', include('contact.urls')),
     path('gererClient/', views.gererClients, name='gererClients'),
     path('gererSalon/', views.gererSalon, name='gererSalon'),
-    # path('', include('payements.urls')),
+    path('', include('payements.urls')),
     path('commande/', include('commande.urls')),
     # path('produits/', ProductLandingPageView.as_view(), name='Landing-page'),
     # path('create-checkout-session/', CreateCheckoutSessionView.as_view(),name='create-checkout-session'),

@@ -10,6 +10,9 @@ urlpatterns = [
     # path('planning-clients/', views.planning_clients, name='planning-clients'),
     path('planning/', views.planning, name='planning'),
 
+    # tdd
+    path('prestations-tdd/', views.prestations_tdd, name='prestations-tdd'),
+
 
     # path('rendezvous/', views.rendezvous, name='rendezvous'),
 

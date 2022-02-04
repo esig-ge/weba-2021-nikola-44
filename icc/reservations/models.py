@@ -3,6 +3,9 @@ from datetime import date, datetime, timedelta
 import datetime as dt
 
 from django.db import models
+from django.db.models import UniqueConstraint, Q
+from django.db.models.functions import Lower
+
 from compte.models import Client
 
 # Create your models here.
@@ -18,11 +21,17 @@ class Prestation(models.Model):
         ('Active', 'Active'),
         ('Inactive', 'Inactive')
     )
-    nom = models.CharField(max_length=60)
+    nom = models.CharField(max_length=60, default='')
     pour = models.CharField(max_length=6, choices=LONGEUR_CHEVEUX, default='')
     prix = models.DecimalField(max_digits=6, decimal_places=2)
     duree = models.TimeField()
     # statut = models.CharField()
+
+    class Meta:
+        # unique_together = ('nom', 'pour')
+        constraints = [
+            models.UniqueConstraint(fields=['nom', 'pour'], name='prestation_unique')
+        ]
 
     def __str__(self):
         if self.pour == '/':

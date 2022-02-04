@@ -1,14 +1,16 @@
 # FERREIRA STOJKOVIC Nikola
 import datetime
+import operator
 from datetime import timedelta
 
+from django.contrib.admin.views.decorators import staff_member_required
 from django.db import connection
+from django.db.models import Case, When
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.admin.views.decorators import staff_member_required
-
 
 from .models import Reservation, Prestation, ResPres
 from compte.models import Client
@@ -17,6 +19,33 @@ from django.contrib import messages
 
 
 # Create your views here.
+
+
+# tdd
+
+@staff_member_required
+def prestations_tdd(request):
+    dico = {}
+    for r in ResPres.objects.all():
+        if r.prestation.id in dico.keys():
+            dico[r.prestation.id] = dico.get(r.prestation.id) + 1
+        else:
+            dico[r.prestation.id] = 1
+
+    print(dico)
+    dico_trie = dict(sorted(dico.items(), key=operator.itemgetter(1), reverse=True))
+    print(dico_trie)
+
+    ordre = []
+    for cle in dico_trie.keys():
+        ordre.append(cle)
+
+    preserved = Case(*[When(pk=pk, then=pos) for pos, pk in enumerate(ordre)])
+    prestation = Prestation.objects.filter(pk__in=ordre).order_by(preserved)
+
+    # prestation = Prestation.objects.all().order_by(dico_trie.keys())
+    return render(request, 'reservations/admin/prestations-tdd.html', {'prestations': prestation})
+    # return HttpResponse("Classement des prestations")
 
 # PLANNING
 
@@ -154,7 +183,7 @@ def reservations(request):
 
 # PRESTATIONS
 
-@staff_member_required
+
 def prestations_admin(request):
     prestation = Prestation.objects.all().order_by('nom', 'pour')
     return render(request, 'reservations/admin/prestations.html', {'prestations': prestation})
