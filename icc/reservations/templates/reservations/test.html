@@ -1,6 +1,7 @@
 {#FERREIRA STOJKOVIC Nikola#}
 {% extends 'base.html' %}
 
+
 {% block content %}
 
     <!--Bouton du modal -->
@@ -31,8 +32,7 @@
             </div>
 
             <!--        Date -->
-            <div class="col-sm-3 m-auto text-center fw-bold">
-                <p id="date"></p>
+            <div class="col-sm-3 m-auto text-center fw-bold" id="date-div">
             </div>
 
             <!--        Fleche de droite -->
@@ -130,77 +130,146 @@
         </div>
 
         <script>
+            // {# Stocke les flèches du calendrier dans des variables #}
+            var addDay = document.querySelector('#addDay');
+            var subDay = document.querySelector('#subDay');
+            // Récupère la div pour pouvoir insérer la date
+            var div = document.querySelector("#date-div");
+            // Crée un élément p et l'ajoute à la div
+            var p = document.createElement("p");
+            div.appendChild(p);
 
-            function sendDay(x) {
-                let date = x
-                const request = new XMLHttpRequest()
-                request.open('GET', `/test/${JSON.stringify(date)}`)
-                request.onload = () => {
-                    const djangoMessage = request.responseText
-                    console.log(djangoMessage)
+            function message(){
+                var alerte = document.createElement("p");
+                alerte.setAttribute("id", "alerte");
+                alerte.style.backgroundColor = "red"
+                alerte.style.color = "white"
+                alerte.style.border = "solid 3px black"
+
+                if (compteur < 0){
+                    div.appendChild(alerte);
+                    alerte.innerHTML = "La date est déjà passée!";
+                    console.log("La date est déjà passée!")
                 }
-                request.send()
+                if (compteur > 29){
+                    div.appendChild(alerte);
+                    alerte.innerHTML = "Il est impossible de reserver 30 jours à l'avance!";
+                    console.log("Il est impossible de reserver 30 jours à l'avance!")
+                }
             }
 
-
-            {# Affiche la date #}
-
-            function affichage(n) {
-                y = n.getFullYear();
-                m = n.toLocaleString('default', {month: 'long'})
-                d = n.getDate();
-                j = n.toLocaleDateString('default', {weekday: 'long'});
-                document.getElementById("date").innerHTML = j.replace(/^\w/, (c) => c.toUpperCase()) + ", " + d + " " + m + " " + y;
-                date = n
-                console.log(date)
+            function affichage (date, callback) {
+                annee = date.getFullYear();
+                mois = date.toLocaleString('default', {month: 'long'});
+                jourEnChiffres = date.getDate();
+                jourEnLettres = date.toLocaleDateString('default', {weekday: 'long'});
+                p.innerHTML = jourEnLettres.replace(/^\w/, (c) => c.toUpperCase()) + ", " + jourEnChiffres + " " + mois + " " + annee;
+                console.log(date);
+                if (div.childNodes.length > 2){
+                div.removeChild(div.lastChild)
+                }
+                callback();
             }
 
-            {# Initialise la date du jour du système et l'affiche #}
-            n = new Date();
-            affichage(n)
-
-            {# Stocke les flèches du calendrier dans des variables #}
-            var addDay = document.querySelector('#addDay')
-            var subDay = document.querySelector('#subDay')
-
-            {# Crée une fonction qui ajoute le nombre de jour en paramètre à la date du jour #}
+            // {# Crée une fonction qui ajoute le nombre de jour en paramètre à la date du jour #}
             Date.prototype.addDays = function (days) {
                 var date = new Date();
                 date.setDate(date.getDate() + days);
                 return date;
-            }
+            };
 
-            {# Crée un compteur qui suit la navigation dans le calendrier #}
-            var cpt = 0;
+            // {# Initialise la date du jour du système et l'affiche #}
+            dateDuJour = new Date();
+            affichage(dateDuJour, message);
 
-            {# Compte le nombre de clicks sur la flèche droite du calendrier, met à jour la date et l'affiche #}
-            addDay.onclick = (function outer() {
-                let counter = 0;
-                return function inner() {
-                    counter++;
-                    cpt++;
-                    x = n.addDays(cpt)
-                    affichage(x)
+            // Compte le decalage en jour avec la date d'aujourd'hui
+            var compteur = 0;
 
-                    console.log(cpt)
-                    console.log('ID:' + addDay.id + 'Number of clicks: ' + counter);
-                };
-            })();
+            addDay.addEventListener("click", function(){
+                compteur = compteur + 1;
+                console.log(compteur);
+                affichage(dateDuJour.addDays(compteur), message);
+            });
 
-            {# Compte le nombre de clicks sur la flèche gauche du calendrier, met à jour la date et l'affiche #}
-            subDay.onclick = (function outer() {
-                let counter = 0;
-                return function inner() {
-                    counter++;
-                    cpt--;
-                    x = n.addDays(cpt)
-                    affichage(x)
-                    console.log(cpt)
-                    console.log('ID:' + subDay.id + 'Number of clicks: ' + counter);
-                };
-            })();
+            subDay.addEventListener("click", function(){
+                compteur = compteur -1;
+                console.log(compteur);
+                affichage(dateDuJour.addDays(compteur), message);
+            });
 
         </script>
+<!--        <script>-->
+
+<!--            function sendDay(x) {-->
+<!--                let date = x-->
+<!--                const request = new XMLHttpRequest()-->
+<!--                request.open('GET', `/test/${JSON.stringify(date)}`)-->
+<!--                request.onload = () => {-->
+<!--                    const djangoMessage = request.responseText-->
+<!--                    console.log(djangoMessage)-->
+<!--                }-->
+<!--                request.send()-->
+<!--            }-->
+
+
+<!--            // {# Affiche la date #}-->
+
+<!--            function affichage(n) {-->
+<!--                y = n.getFullYear();-->
+<!--                m = n.toLocaleString('default', {month: 'long'})-->
+<!--                d = n.getDate();-->
+<!--                j = n.toLocaleDateString('default', {weekday: 'long'});-->
+<!--                document.getElementById("date").innerHTML = j.replace(/^\w/, (c) => c.toUpperCase()) + ", " + d + " " + m + " " + y;-->
+<!--                date = n-->
+<!--                console.log(date)-->
+<!--            }-->
+
+<!--            // {# Initialise la date du jour du système et l'affiche #}-->
+<!--            n = new Date();-->
+<!--            affichage(n)-->
+
+<!--            // {# Stocke les flèches du calendrier dans des variables #}-->
+<!--            var addDay = document.querySelector('#addDay')-->
+<!--            var subDay = document.querySelector('#subDay')-->
+
+<!--            // {# Crée une fonction qui ajoute le nombre de jour en paramètre à la date du jour #}-->
+<!--            Date.prototype.addDays = function (days) {-->
+<!--                var date = new Date();-->
+<!--                date.setDate(date.getDate() + days);-->
+<!--                return date;-->
+<!--            }-->
+
+<!--            // {# Crée un compteur qui suit la navigation dans le calendrier #}-->
+<!--            var cpt = 0;-->
+
+<!--            // {# Compte le nombre de clicks sur la flèche droite du calendrier, met à jour la date et l'affiche #}-->
+<!--            addDay.onclick = (function outer() {-->
+<!--                let counter = 0;-->
+<!--                return function inner() {-->
+<!--                    counter++;-->
+<!--                    cpt++;-->
+<!--                    x = n.addDays(cpt)-->
+<!--                    affichage(x)-->
+
+<!--                    console.log(cpt)-->
+<!--                    console.log('ID:' + addDay.id + 'Number of clicks: ' + counter);-->
+<!--                };-->
+<!--            })();-->
+
+<!--            // {# Compte le nombre de clicks sur la flèche gauche du calendrier, met à jour la date et l'affiche #}-->
+<!--            subDay.onclick = (function outer() {-->
+<!--                let counter = 0;-->
+<!--                return function inner() {-->
+<!--                    counter++;-->
+<!--                    cpt&#45;&#45;;-->
+<!--                    x = n.addDays(cpt)-->
+<!--                    affichage(x)-->
+<!--                    console.log(cpt)-->
+<!--                    console.log('ID:' + subDay.id + 'Number of clicks: ' + counter);-->
+<!--                };-->
+<!--            })();-->
+
+<!--        </script>-->
 
     </div>
 {% endblock %}
