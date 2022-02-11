@@ -29,6 +29,7 @@ urlpatterns = [
     path('admin/supprimer-prestation-<int:id>/', views.supprimer_prestation, name='supprimer-prestation'),
     # path('reserver/', views.reserver, name='reserver'),
     path('test/', views.test, name='test'),
+    path('ajax/', views.ajax, name='ajax'),
     path('test-prestations/', views.test_prestations, name='test-prestation'),
     # path('<int:jour>/', views.test, name='test-jour')
 

@@ -90,6 +90,11 @@ def test(request):  # ajouter un paramètre jour
     return render(request, 'reservations/test.html', {'r_matin': r_matin, 'r_apresmidi': r_apresmidi, 'prestations': prestations, 'types': types})
 
 
+def ajax(request):
+    prestations = Prestation.objects.all()
+    reservations = Reservation.objects.all()
+    return HttpResponse(reservations)
+
 def test_prestations(request):
     prestations = Prestation.objects.all()
 
