@@ -71,7 +71,7 @@ class Reservation(models.Model):
     # statut réservation
 
     def __str__(self):
-        return 'Réservation du ' + self.date.__str__() + self.heure.__str__()
+        return str('Réservation du ' + self.date.__str__() + self.heure.__str__())
 
     def is_past_due(self):
         return datetime.now().astimezone() > datetime.combine(datetime.date(self.date.value_from_object(self)), datetime.time(self.heure.value_from_object(self)))

@@ -51,33 +51,45 @@ dateDuJour = new Date();
 affichage(dateDuJour, message);
 
 //Ajax
-var result = div.appendChild(document.createElement('p'))
-var httpRequest = new XMLHttpRequest()
+// var formsubday = document.getElementById('form-subday')
+// var formaddday = document.getElementById('form-addday')
+// // var csrf = document.getElementsByName('csrfmiddelwaretoken')
+// // console.log('csrf', csrf)
+//
+// formsubday.addEventListener('submit', (e)=>{
+//     e.preventDefault()
+//     requeteAjax()
+//     return false
+// }
+//     )
+// formaddday.addEventListener('submit', requeteAjax)
 
-httpRequest.open('GET', '/reservations/ajax/', true)
+function requeteAjax(day) {
+    var result = document.getElementById('row-date').appendChild(document.createElement('p'))
+    result.setAttribute('id', 'result')
+    var xhr = new XMLHttpRequest()
+    var getm = day.getMonth()+1
 
-httpRequest.onreadystatechange = function () {
-    if (httpRequest.readyState === 4) {
+    xhr.open('GET', '/reservations/ajax-' + day.getDate() + '-' + getm + '-' + day.getFullYear() + '/', true)
 
-        result.innerHTML = ''
-        if (httpRequest.status === 200) {
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
 
-            // var results = JSON.parse(httpRequest.responseText)
-            result.innerHTML = httpRequest.responseText
-            var ul = document.createElement('ul')
-            result.appendChild(ul)
-
-            // for (var i = 0; i < results.length; i++) {
-            //     var li = document.createElement('li')
-            //     li.innerHTML = results[i].name
-            //     ul.appendChild(li)
-            // }
-        } else {
-            console.log('ça marche pas!')
+            result.innerHTML = ''
+            if (xhr.status === 200) {
+                var d = day.getDate()
+                var m = day.getMonth()
+                var y = day.getFullYear()
+                result.innerHTML = day
+                console.log('voici la date du jour', d,m,y)
+            } else {
+                console.log('ça marche pas!')
+            }
         }
     }
+    xhr.send()
 }
-httpRequest.send()
+
 //Fin ajax
 
 // Compte le decalage en jour avec la date d'aujourd'hui
@@ -86,11 +98,15 @@ var compteur = 0;
 addDay.addEventListener("click", function () {
     compteur = compteur + 1;
     console.log(compteur);
-    affichage(dateDuJour.addDays(compteur), message);
+    var day = dateDuJour.addDays(compteur)
+    affichage(day, message);
+    requeteAjax(day)
 });
 
 subDay.addEventListener("click", function () {
     compteur = compteur - 1;
     console.log(compteur);
-    affichage(dateDuJour.addDays(compteur), message);
+    var day = dateDuJour.addDays(compteur)
+    affichage(day, message);
+    requeteAjax(day)
 });

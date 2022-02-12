@@ -1,5 +1,6 @@
 # FERREIRA STOJKOVIC Nikola
 import datetime
+import json
 import operator
 from datetime import timedelta
 
@@ -11,12 +12,14 @@ from django.dispatch import receiver
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.template import RequestContext
 
 from .models import Reservation, Prestation, ResPres
 from compte.models import Client
 from .forms import PrestationForm, ReservationForm
 from django.contrib import messages
-
+from django.http import JsonResponse
+from django.core import serializers
 
 # Create your views here.
 
@@ -84,16 +87,33 @@ def test(request):  # ajouter un paramètre jour
     r_jour = Reservation.objects.all().filter(date=datetime.date.today()).order_by('date').order_by('heure')
     print(type(r_jour))
     # r_jour.filter(heure=datetime.date.today()).order_by('heure')
-    r_matin = r_jour.exclude()
-    r_apresmidi = r_jour.exclude()
+    r_matin = r_jour.exclude(heure__gt='12:00:00')
+    r_apresmidi = r_jour.exclude(heure__lt='12:00:00')
 
+    print(r_matin)
+    print(r_apresmidi)
+    print(r_jour)
+    for i in r_jour:
+        print(i.date)
     return render(request, 'reservations/test.html', {'r_matin': r_matin, 'r_apresmidi': r_apresmidi, 'prestations': prestations, 'types': types})
 
 
-def ajax(request):
-    prestations = Prestation.objects.all()
-    reservations = Reservation.objects.all()
-    return HttpResponse(reservations)
+def ajax(request, d, m, y):
+    print('Vous avez appellez Ajax!!')
+    print(datetime.datetime(y, m, d))
+    r_jour = Reservation.objects.all().filter(date=datetime.datetime(y, m, d)).order_by('date').order_by('heure')
+    r_matin = r_jour.exclude(heure__gt='12:00:00')
+    r_apresmidi = r_jour.exclude(heure__lt='12:00:00')
+    qs_json_matin = serializers.serialize('json', r_matin)
+    qs_json_apresmidi = serializers.serialize('json', r_apresmidi)
+    data_json = [
+        qs_json_matin,
+        qs_json_apresmidi
+    ]
+    # return HttpResponse(data, content_type='application/json')
+    return HttpResponse(data_json, content_type='application/json')
+    # return render(request, 'reservations/test.html', {'r_matin': qs_json_matin, 'r_apresmidi': qs_json_apresmidi})
+
 
 def test_prestations(request):
     prestations = Prestation.objects.all()

@@ -13,13 +13,21 @@
     <!-- Titre -->
     <h1>Planning des réservations</h1>
     <p id="test"></p>
+    <form id="form-subday">
+        {% csrf_token %}
+        <input type="submit" value="<=">
+    </form>
 
+    <form id="form-addday">
+        {% csrf_token %}
+        <input type="submit" value="=>">
+    </form>
 
     <!-- Contenu de la page -->
     <div class="container mt-5 planning">
 
         <!--    Navbar date -->
-        <div class="row">
+        <div class="row" id="row-date">
 
             <!--        Fleche de gauche -->
             <div class="col-sm-1 float-left">
