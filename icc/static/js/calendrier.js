@@ -51,22 +51,9 @@ dateDuJour = new Date();
 affichage(dateDuJour, message);
 
 //Ajax
-// var formsubday = document.getElementById('form-subday')
-// var formaddday = document.getElementById('form-addday')
-// // var csrf = document.getElementsByName('csrfmiddelwaretoken')
-// // console.log('csrf', csrf)
-//
-// formsubday.addEventListener('submit', (e)=>{
-//     e.preventDefault()
-//     requeteAjax()
-//     return false
-// }
-//     )
-// formaddday.addEventListener('submit', requeteAjax)
-
 function requeteAjax(day) {
-    var result = document.getElementById('row-date').appendChild(document.createElement('p'))
-    result.setAttribute('id', 'result')
+    // var result = document.getElementById('row-date').appendChild(document.createElement('p'))
+    // result.setAttribute('id', 'result')
     var xhr = new XMLHttpRequest()
     var getm = day.getMonth()+1
 
@@ -75,12 +62,39 @@ function requeteAjax(day) {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
 
-            result.innerHTML = ''
+            // result.innerHTML = ''
             if (xhr.status === 200) {
                 var d = day.getDate()
                 var m = day.getMonth()
                 var y = day.getFullYear()
-                result.innerHTML = day
+                // result.innerHTML = day
+                var jsonResponse = JSON.parse(xhr.responseText)
+                // Object.entries(jsonResponse).forEach(
+                //     ([key, value]) => console.log(key, value)
+                // );
+                var matin = []
+                var apresmidi = []
+                for (var i = 0; i < jsonResponse.length; i++) {
+                    console.log(i, jsonResponse[i])
+                    if (jsonResponse[i]['fields'].heure < '12:00:00'){
+                        console.log('c\'est le matin')
+                        matin.push(jsonResponse[i])
+                    } else {
+                        console.log('c\'est l\'apres midi')
+                        apresmidi.push(jsonResponse[i])
+                    }
+                }
+                var list_matin = "{{r_matin}}"
+                var list_apresmidi = "{{r_apresmidi}}"
+                effacer()
+                afficher(matin, apresmidi)
+
+                list_matin = matin
+                list_apresmidi = apresmidi
+                console.log('list_matin', list_matin)
+                console.log('list_apresmidi', list_apresmidi)
+                // console.log(xhr.responseText)
+                // result.innerHTML = xhr.responseText
                 console.log('voici la date du jour', d,m,y)
             } else {
                 console.log('ça marche pas!')
@@ -101,6 +115,8 @@ addDay.addEventListener("click", function () {
     var day = dateDuJour.addDays(compteur)
     affichage(day, message);
     requeteAjax(day)
+    // var r_matin = document.getElementsByName('r_matin')
+    // console.log('r_matin: ', r_matin)
 });
 
 subDay.addEventListener("click", function () {
