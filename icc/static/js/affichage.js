@@ -13,10 +13,10 @@ function effacer(){
 
 function afficher(matin, apresmidi){
     var rowmatin = document.getElementById('row-matin')
-    console.log('maaaatiiiin', matin)
+    // console.log('maaaatiiiin', matin)
 
     for (var i = 0; i < matin.length; i++) {
-        console.log(matin[i])
+        // console.log(matin[i])
         var d1 = document.createElement('div')
         d1.setAttribute('id', 'div-matin')
         d1.setAttribute('class', 'col-sm-2 text-center p-1 justify-content-center m-1 reservationr modele')

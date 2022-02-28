@@ -99,18 +99,12 @@ def test(request):  # ajouter un paramètre jour
 
 
 def ajax(request, d, m, y):
-    print('Vous avez appellez Ajax!!')
-    print(datetime.datetime(y, m, d))
     r_jour = Reservation.objects.all().filter(date=datetime.datetime(y, m, d)).order_by('date').order_by('heure')
     r_matin = r_jour.exclude(heure__gt='12:00:00')
-    r_apresmidi = r_jour.exclude(heure__lt='12:00:00')
-    qs_json_matin = serializers.serialize('json', r_matin)
-    qs_json_apresmidi = serializers.serialize('json', r_apresmidi)
+    r_apresmidi = r_jour.exclude(heure__lt='12:00:01')
     qs_json_list = [*r_matin, *r_apresmidi]
     data_json = serializers.serialize('json', qs_json_list)
-    # return HttpResponse(data, content_type='application/json')
     return HttpResponse(data_json, content_type='application/json')
-    # return render(request, 'reservations/test.html', {'r_matin': qs_json_matin, 'r_apresmidi': qs_json_apresmidi})
 
 
 def test_prestations(request):

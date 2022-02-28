@@ -52,52 +52,47 @@ affichage(dateDuJour, message);
 
 //Ajax
 function requeteAjax(day) {
-    // var result = document.getElementById('row-date').appendChild(document.createElement('p'))
-    // result.setAttribute('id', 'result')
     var xhr = new XMLHttpRequest()
     var getm = day.getMonth()+1
 
-    xhr.open('GET', '/reservations/ajax-' + day.getDate() + '-' + getm + '-' + day.getFullYear() + '/', true)
+    xhr.open('GET', '/reservations/ajax-' + day.getDate() + '-' + getm + '-' + day.getFullYear() + '/', false)
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
 
             // result.innerHTML = ''
             if (xhr.status === 200) {
-                var d = day.getDate()
-                var m = day.getMonth()
-                var y = day.getFullYear()
+                // var d = day.getDate()
+                // var m = day.getMonth()
+                // var y = day.getFullYear()
                 // result.innerHTML = day
                 var jsonResponse = JSON.parse(xhr.responseText)
+                console.log('response totale! ___=>', jsonResponse)
                 // Object.entries(jsonResponse).forEach(
                 //     ([key, value]) => console.log(key, value)
                 // );
                 var matin = []
                 var apresmidi = []
                 for (var i = 0; i < jsonResponse.length; i++) {
-                    console.log(i, jsonResponse[i])
-                    if (jsonResponse[i]['fields'].heure < '12:00:00'){
-                        console.log('c\'est le matin')
+                    // console.log(i, jsonResponse[i])
+                    if (jsonResponse[i]['fields'].heure <= '12:00:00'){
+                        // console.log('c\'est le matin')
                         matin.push(jsonResponse[i])
                     } else {
-                        console.log('c\'est l\'apres midi')
+                        // console.log('c\'est l\'apres midi')
                         apresmidi.push(jsonResponse[i])
                     }
                 }
-                var list_matin = "{{r_matin}}"
-                var list_apresmidi = "{{r_apresmidi}}"
                 effacer()
                 afficher(matin, apresmidi)
 
-                list_matin = matin
-                list_apresmidi = apresmidi
-                console.log('list_matin', list_matin)
-                console.log('list_apresmidi', list_apresmidi)
+                // console.log('list_matin', matin)
+                // console.log('list_apresmidi', apresmidi)
                 // console.log(xhr.responseText)
                 // result.innerHTML = xhr.responseText
-                console.log('voici la date du jour', d,m,y)
+                // console.log('voici la date du jour', d,m,y)
             } else {
-                console.log('ça marche pas!')
+                // console.log('ça marche pas!')
             }
         }
     }
