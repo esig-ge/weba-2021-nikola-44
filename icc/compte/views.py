@@ -7,6 +7,8 @@ from .forms import CreerUtilisateur, ProfileForm, CommentaireForm, ProfileModifi
 from django.contrib import messages
 from .models import Client
 from django.contrib.auth.models import User
+from django.contrib.auth.hashers import check_password
+
 
 
 def inscriptionPage(request):
@@ -37,8 +39,21 @@ def accesPage(request):
     context = {}
     if request.method == 'POST':
         username = request.POST.get('username')
+        # print("voici le code", User.objects.raw("select * from auth_user where username ='{0}';"
+        #                                         .format(username))[0].password)
         password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
+
+        # print("oui --- non ??", User.objects.raw("select * from auth_user where username ='{0}' and password ='{1}';"
+        #                         .format(username, check_password(password,
+        #                         User.objects.raw("select * from auth_user where username ='{0}';"
+        #                         .format(username))[0].password))))
+
+        # user = authenticate(request, username=username, password=password)
+        print("fkdjskakjfsld", User.objects.raw("select * from auth_user where username ='{0}'"
+                                .format(username))[0])
+        # user = User.objects.raw("select * from auth_user where username ='" + username + "'")[0]
+                                # .format(username))[0]
+        user = User.objects.get(username=username)
         if user is not None:
             login(request, user)
             return redirect('accueil')

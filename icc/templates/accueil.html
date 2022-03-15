@@ -15,6 +15,7 @@
     <h1 class="titreAccueil">Catisa Coiffure</h1><br><br>
     {% if not request.user.is_authenticated %}
         <h2>Veuillez vous conectez pour prendre rendez-vous et pour commander des produits.</h2>
+
     {% endif %}
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
